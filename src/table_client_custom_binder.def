@@ -1,0 +1,3 @@
+LIBRARY   table_client_custom_binder
+EXPORTS
+  table_client_custom_binder_register @1
