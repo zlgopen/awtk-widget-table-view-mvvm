@@ -1,0 +1,17 @@
+[
+  {
+    "params": [],
+    "annotation": {
+      "global": true
+    },
+    "desc": "注册table client的自定义绑定函数。",
+    "name": "table_client_custom_binder_register",
+    "return": {
+      "type": "ret_t",
+      "desc": "返回RET_OK表示成功，否则表示失败。"
+    },
+    "type": "method",
+    "header": "src/table_client_custom_binder.h",
+    "level": 1
+  }
+]

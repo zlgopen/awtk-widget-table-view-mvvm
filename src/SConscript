@@ -11,7 +11,7 @@ SOURCES=Glob('*.c')
 
 EXPORT_DEF=''
 if OS_NAME == 'Windows':
-  EXPORT_DEF = ' /DEF:"src/table_client_custom_binder.def" '
+  EXPORT_DEF = ' /DEF:"src/table_view_mvvm.def" '
 
 if 'BUILD_SHARED' in os.environ and os.environ['BUILD_SHARED'] == 'True':
   LINKFLAGS=env['LINKFLAGS'] + EXPORT_DEF 

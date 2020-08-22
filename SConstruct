@@ -15,7 +15,7 @@ DEPENDS_LIBS = [
 ]
 
 helper = app.Helper(ARGUMENTS);
-helper.set_deps(DEPENDS_LIBS).call(DefaultEnvironment)
+helper.set_dll_def('src/table_view_mvvm.def').set_deps(DEPENDS_LIBS).call(DefaultEnvironment)
 
 SConscriptFiles = ['src/SConscript']
 SConscript(SConscriptFiles)
