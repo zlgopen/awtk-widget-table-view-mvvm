@@ -1,0 +1,11 @@
+import os
+import sys
+
+env=DefaultEnvironment().Clone()
+BIN_DIR=os.environ['BIN_DIR'];
+
+src_csv_view = Glob('csv_view/*.c')
+src_jsdemo = Glob('jsdemo/*.c')
+
+env.Program(os.path.join(BIN_DIR, 'jsdemo'), src_jsdemo, LIBS = ['table_view_mvvm'] + env['LIBS']);
+env.Program(os.path.join(BIN_DIR, 'csv_view'), src_csv_view, LIBS = ['table_view_mvvm'] + env['LIBS']);

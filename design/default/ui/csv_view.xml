@@ -1,0 +1,36 @@
+<window theme="main" v-model="csv_view">
+  <table_view x="10" y="10" w="-20" h="-80">
+    <table_header x="0"  y="0" w="100%" h="30" name="title" children_layout="default(r=1,c=0,s=5,m=5)">
+      <label w="8%" text="Index"/>
+      <label w="20%" text="Name"/>
+      <label w="10%" text="Chinese"/>
+      <label w="10%" text="Math"/>
+      <label w="10%" text="English"/>
+      <label w="20%" text="Memo"/>
+      <label w="10%" text="Checked"/>
+      <label w="10%" text="Action"/>
+    </table_header>
+
+    <table_client name="table_client" x="0"  y="30" w="100%" h="-30" row_height="40">
+      <table_row children_layout="default(r=1,c=0,s=5,m=5)" w="100%" v-for="">
+        <label w="8%" h="100%" v-data:text="{index}"/>
+        <label w="20%" h="100%" v-data:text="{item.0}"/>
+        <label w="10%" h="100%" v-data:text="{item.1}"/>
+        <label w="10%" h="100%" v-data:text="{item.2}"/>
+        <label w="10%" h="100%" v-data:text="{item.3}"/>
+        <edit w="20%" h="80%" v-data:text="{item.4}"/>
+        <check_button w="10%" v-data:value="{item.checked}"/>
+        <button w="10%" v-on:click="{remove}" text="remove"/>
+      </table_row>
+    </table_client>
+
+    <scroll_bar_d name="vbar" x="right" y="30" w="12" h="-30" value="0"/>
+  </table_view>
+  <view x="10" y="b:10" w="-20" h="40" children_layout="default(r=1,c=5,s=20,m=5)">
+    <button text="Clear" v-on:click="{clear}"/>
+    <button text="Remove" v-on:click="{remove_checked}"/>
+    <button text="Save" v-on:click="{save}"/>
+    <button text="Reload" v-on:click="{reload}"/>
+    <button text="Quit" v-on:click="{nothing, CloseWindow=True, QuitApp=true}"/>
+  </view>
+</window>

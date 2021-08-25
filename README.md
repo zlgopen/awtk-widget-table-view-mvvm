@@ -15,8 +15,9 @@ cd awtk; scons; cd -
 
 ```
 git clone https://github.com/zlgopen/awtk-mvvm.git
-cd awtk-mvvm; scons; cd -
 ```
+
+参阅 awtk-mvvm 的 README.md 步骤进行编译。
 
 3. 获取 awtk-widget-table-view 并编译
 
@@ -25,31 +26,75 @@ git clone https://github.com/zlgopen/awtk-widget-table-view.git
 cd awtk-widget-table-view; scons; cd -
 ```
 
-## 编译
+## 运行
+
+1. 生成示例代码的资源
+
+```
+python scripts/update_res.py all
+```
+> 也可以使用 Designer 打开项目，之后点击 “打包” 按钮进行生成；
+> 如果资源发生修改，则需要重新生成资源。
+
+如果 PIL 没有安装，执行上述脚本可能会出现如下错误：
+```cmd
+Traceback (most recent call last):
+...
+ModuleNotFoundError: No module named 'PIL'
+```
+请用 pip 安装：
+```cmd
+pip install Pillow
+```
+
+2. 编译
 
 ```
 scons
 ```
 
+3. 运行
+
+* 基本示例
+
+```
+./bin/jsdemo
+```
+
+* csv 文件查看和编辑
+
+```
+./bin/csv_view
+```
+
 ## 用法
 
 ```c
-view_model_t *scores_view_model_create(navigator_request_t *req) {
-  csv_file_t *csv = csv_file_create("data/scores_large.csv", ',');
-  object_t *obj = csv_file_object_create(csv);
+// demos\csv_view\application.c
+static view_model_t* csv_view_model_create(navigator_request_t* req) {
+  csv_file_t* file = csv_file_create("data/scores.csv", ',');
 
-  return view_model_array_object_wrapper_create(obj);
+  if (file != NULL) {
+    object_t* obj = csv_file_object_create(file);
+    if (obj != NULL) {
+      view_model_t* view_model = view_model_array_object_wrapper_create(obj);
+      return view_model;
+    }
+    csv_file_destroy(file);
+  }
+
+  return NULL;
 }
 
-ret_t application_init(void) {
+ret_t application_init() {
   table_view_register();
   table_client_custom_binder_register();
-  view_model_factory_register("scores", scores_view_model_create);
 
-  return navigator_to("table_view");
+  view_model_factory_register("csv_view", csv_view_model_create);
+
+  return navigator_to("csv_view");
 }
 ```
-> 完整示例请参考：https://github.com/zlgopen/awtk-mvvm-c-examples/blob/master/src/table_csv_view.c
 
 ## 参考
 
