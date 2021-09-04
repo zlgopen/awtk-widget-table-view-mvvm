@@ -32,7 +32,7 @@ static view_model_t* csv_view_model_create(navigator_request_t* req) {
   return_value_if_fail(tk_strlen(path) > 0, NULL);
 
   char* bin = strstr(path, "bin");
-  tk_strcpy(bin, "data\\scores.csv");
+  tk_strcpy(bin, "data/scores.csv");
 
   csv_file_t* file = csv_file_create(path, ',');
 
