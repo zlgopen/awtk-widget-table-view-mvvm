@@ -1,4 +1,4 @@
-/**
+﻿/**
  * File:  table_client_custom_binder.c
  * Author: AWTK Develop Team
  * Brief: table_client_custom_binder
@@ -61,6 +61,12 @@ static ret_t table_client_on_items_changed(void* ctx, event_t* e) {
   return RET_OK;
 }
 
+static ret_t table_client_on_before_paint(void* ctx, event_t* e) {
+  // 由于 binding_context_update_to_view 为 idle 执行，因此在 paint 之前触发 update，避免显示的数据不正确
+  idle_dispatch();
+  return RET_OK;
+}
+
 static ret_t table_client_on_prepare_row_mvvm(void* ctx, widget_t* client, uint32_t prepare_cnt) {
   binding_rule_t* rule = BINDING_RULE(ctx);
   items_binding_t* binding = ITEMS_BINDING(rule);
@@ -99,6 +105,7 @@ static ret_t table_client_bind(binding_context_t* ctx, binding_rule_t* rule) {
     table_client_set_on_prepare_row(widget, table_client_on_prepare_row_mvvm, rule);
     table_client_set_on_load_data(widget, table_client_on_load_data_mvvm, rule);
     emitter_on(emitter, EVT_ITEMS_CHANGED, table_client_on_items_changed, rule);
+    widget_on(widget, EVT_BEFORE_PAINT, table_client_on_before_paint, NULL);
   }
 
   return RET_OK;
