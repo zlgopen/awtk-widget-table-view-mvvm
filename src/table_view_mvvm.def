@@ -1,3 +1,4 @@
 LIBRARY   table_view_mvvm
 EXPORTS
     table_client_custom_binder_register
+    table_view_mvvm_register

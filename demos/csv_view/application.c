@@ -24,7 +24,7 @@
 #include "mvvm/base/view_model_array_object_wrapper.h"
 #include "csv/csv_file_object.h"
 #include "table_view_register.h"
-#include "table_client_custom_binder.h"
+#include "table_view_mvvm_register.h"
 
 static view_model_t* csv_view_model_create(navigator_request_t* req) {
   char path[MAX_PATH + 1] = {0};
@@ -50,7 +50,7 @@ static view_model_t* csv_view_model_create(navigator_request_t* req) {
 
 ret_t application_init() {
   table_view_register();
-  table_client_custom_binder_register();
+  table_view_mvvm_register();
 
   view_model_factory_register("csv_view", csv_view_model_create);
 

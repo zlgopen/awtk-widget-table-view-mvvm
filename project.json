@@ -1,11 +1,12 @@
 {
-  "name": "table-view-mvvm",
+  "name": "table_view_mvvm",
   "version": "1.0.0",
   "date": "2020-07-15",
   "team": "AWTK Develop Team",
   "author": "Li XianJing <xianjimli@hotmail.com>",
   "desc": "表格视图MVVM demo。",
   "copyright": "Guangzhou ZHIYUAN Electronics Co.,Ltd.",
+  "type": "PROJECT_CUSTOM_WIDGET_MVVM",
   "appType": "APP_MOBILE",
   "hardware": "RT1050",
   "entry": "main",
@@ -38,6 +39,12 @@
   },
   "creator": {
     "name": "AWTK Designer",
-    "version": "0.1.5"
+    "version": "2.0.21"
+  },
+  "awtkRoot": "${AWTK_SDK_PATH}/awtk",
+  "awtkMvvmRoot": "${AWTK_SDK_PATH}/awtk-mvvm",
+  "dependencies": {
+    "awtk": ">=2112",
+    "awtk-widget-table-view": "^1.0.0"
   }
 }

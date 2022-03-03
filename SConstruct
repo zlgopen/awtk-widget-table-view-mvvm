@@ -8,7 +8,6 @@ DEPENDS_LIBS = [
     'static_libs': []
   }
 ]
-
 ARGUMENTS['WITH_MVVM'] = 'true'
 ARGUMENTS['WITH_JERRYSCRIPT'] = 'true'
 helper = app.Helper(ARGUMENTS);

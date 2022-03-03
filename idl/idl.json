@@ -13,5 +13,20 @@
     "type": "method",
     "header": "src/table_client_custom_binder.h",
     "level": 1
+  },
+  {
+    "params": [],
+    "annotation": {
+      "global": true
+    },
+    "desc": "注册控件。",
+    "name": "table_view_mvvm_register",
+    "return": {
+      "type": "ret_t",
+      "desc": "返回RET_OK表示成功，否则表示失败。"
+    },
+    "type": "method",
+    "header": "src/table_view_mvvm_register.h",
+    "level": 1
   }
 ]

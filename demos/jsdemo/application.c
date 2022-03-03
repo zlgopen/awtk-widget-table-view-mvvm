@@ -22,11 +22,11 @@
 #include "awtk.h"
 #include "mvvm/mvvm.h"
 #include "table_view_register.h"
-#include "table_client_custom_binder.h"
+#include "table_view_mvvm_register.h"
 
 ret_t application_init() {
   table_view_register();
-  table_client_custom_binder_register();
+  table_view_mvvm_register();
 
   return navigator_to("main");
 }
