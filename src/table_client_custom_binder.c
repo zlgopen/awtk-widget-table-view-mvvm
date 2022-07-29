@@ -25,6 +25,21 @@
 #include "table_client/table_client.h"
 #include "table_client_custom_binder.h"
 
+static int32_t view_model_get_items_nr(object_t* obj) {
+  value_t v;
+  if (object_is_collection(obj)) {
+    if (object_get_prop(obj, VIEW_MODEL_PROP_ITEMS, &v) == RET_OK) {
+      if (v.type == VALUE_TYPE_OBJECT) {
+        return object_get_prop_int(value_object(&v), OBJECT_PROP_SIZE, 0);
+      } else {
+        return value_int(&v);
+      }
+    }
+  }
+
+  return object_get_prop_int(obj, OBJECT_PROP_SIZE, 0);
+}
+
 static ret_t table_client_on_load_data_mvvm(void* ctx, uint32_t row_index, widget_t* row) {
   items_binding_t* binding = ITEMS_BINDING(ctx);
   widget_t* widget = widget_get_child(row->parent, 0);
@@ -49,11 +64,7 @@ static ret_t table_client_on_items_changed(void* ctx, event_t* e) {
 
       if (obj == OBJECT(e->target)) {
         widget_t* widget = WIDGET(BINDING_RULE_WIDGET(rule));
-        if (obj == OBJECT(BINDING_RULE_VIEW_MODEL(rule)) && object_is_collection(obj)) {
-          table_client_set_rows(widget, object_get_prop_int(obj, VIEW_MODEL_PROP_ITEMS, 0));
-        } else {
-          table_client_set_rows(widget, object_get_prop_int(obj, OBJECT_PROP_SIZE, 0));
-        }
+        table_client_set_rows(widget, view_model_get_items_nr(obj));
       }
     }
   }
@@ -79,11 +90,7 @@ static ret_t table_client_on_prepare_row_mvvm(void* ctx, widget_t* client, uint3
       if (v.type == VALUE_TYPE_OBJECT) {
         object_t* obj = value_object(&v);
 
-        if (obj == OBJECT(BINDING_RULE_VIEW_MODEL(rule)) && object_is_collection(obj)) {
-          table_client_set_rows(client, object_get_prop_int(obj, VIEW_MODEL_PROP_ITEMS, 0));
-        } else {
-          table_client_set_rows(client, object_get_prop_int(obj, OBJECT_PROP_SIZE, 0));
-        }
+        table_client_set_rows(client, view_model_get_items_nr(obj));
 
         binding->fixed_widget_count = prepare_cnt;
         binding_context_notify_items_changed_sync(bctx, obj);
