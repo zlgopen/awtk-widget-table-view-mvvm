@@ -9,7 +9,6 @@ DEPENDS_LIBS = [
   }
 ]
 ARGUMENTS['WITH_MVVM'] = 'true'
-ARGUMENTS['WITH_JERRYSCRIPT'] = 'true'
 helper = app.Helper(ARGUMENTS);
 helper.set_dll_def('src/table_view_mvvm.def').set_deps(DEPENDS_LIBS).call(DefaultEnvironment)
 
